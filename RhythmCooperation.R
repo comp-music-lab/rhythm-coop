@@ -1,5 +1,5 @@
 #This code was used on 2020-2-28 to perform the analyses reported in:
-#Savage, P. E., Yamauchi, M., Hamaguchi, M., Tarr, B., Kitayama, Y., & Fujii, S. (Submitted). Rhythm, synchrony and cooperation
+#Savage, P. E., Yamauchi, M., Hamaguchi, M., Tarr, B., Kitayama, Y., & Fujii, S. Rhythm, synchrony and cooperation.
 
 #Set working directory
 setwd("/Users/pesavage/Documents/Research/Papers/Unpublished/Social harmony")
