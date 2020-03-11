@@ -23,7 +23,8 @@ library(compute.es)
 library(psych)
 
 #power analysis
-pwr.t.test(n = , d = 0.45 , sig.level = 0.025, power = 0.95, type = c("two.sample"), alternative=c("greater"))
+pwr.t.test(n = , d = 0.45 , sig.level = 0.025, power = 0.95, type = c("two.sample"), alternative=c("greater")) # for d =.45, power =.95
+pwr.t.test(n = , d = 0.4 , sig.level = 0.025, power = 0.8, type = c("two.sample"), alternative=c("greater")) # for d =.4, power =.8
 
 #Specify data download location
 file.data <- "https://raw.githubusercontent.com/compmusiclab/rhythm-coop/master/RhythmPilotData(Fig3).csv"
