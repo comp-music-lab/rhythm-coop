@@ -23,7 +23,7 @@ library(compute.es)
 library(psych)
 
 #power analysis
-pwr.t.test(n = , d = 0.45 , sig.level = 0.025, power = 0.95, type = c("two.sample"), alternative=c("greater")) # for d =.45, power =.95
+#pwr.t.test(n = , d = 0.45 , sig.level = 0.025, power = 0.95, type = c("two.sample"), alternative=c("greater")) # for d =.45, power =.95
 pwr.t.test(n = , d = 0.4 , sig.level = 0.025, power = 0.8, type = c("two.sample"), alternative=c("greater")) # for d =.4, power =.8
 
 #Specify data download location
@@ -105,7 +105,9 @@ t.test(attitudinal ~ group, data, alternative="greater")
 #equivalence tests:
 
 #1) Behavioral
-TOSTtwo(m1= mean(subset(data,group=="beat")$behavior), m2= mean(subset(data,group=="no-beat")$behavior), sd1= sd(subset(data,group=="beat")$behavior), sd2= sd(subset(data,group=="no-beat")$behavior), n1= length(subset(data,group=="beat")$behavior), n2= length(subset(data,group=="no-beat")$behavior), low_eqbound_d=-0.45, high_eqbound_d=0.45, alpha = 0.025)
+#TOSTtwo(m1= mean(subset(data,group=="beat")$behavior), m2= mean(subset(data,group=="no-beat")$behavior), sd1= sd(subset(data,group=="beat")$behavior), sd2= sd(subset(data,group=="no-beat")$behavior), n1= length(subset(data,group=="beat")$behavior), n2= length(subset(data,group=="no-beat")$behavior), low_eqbound_d=-0.45, high_eqbound_d=0.45, alpha = 0.025) #assuming SESOI .45
+TOSTtwo(m1= mean(subset(data,group=="beat")$behavior), m2= mean(subset(data,group=="no-beat")$behavior), sd1= sd(subset(data,group=="beat")$behavior), sd2= sd(subset(data,group=="no-beat")$behavior), n1= length(subset(data,group=="beat")$behavior), n2= length(subset(data,group=="no-beat")$behavior), low_eqbound_d=-0.4, high_eqbound_d=0.4, alpha = 0.025)#assuming SESOI .4
 
 #2) Attitudinal
-TOSTtwo(m1= mean(subset(data,group=="beat")$attitudinal), m2= mean(subset(data,group=="no-beat")$attitudinal), sd1= sd(subset(data,group=="beat")$attitudinal), sd2= sd(subset(data,group=="no-beat")$attitudinal), n1= length(subset(data,group=="beat")$attitudinal), n2= length(subset(data,group=="no-beat")$attitudinal), low_eqbound_d=-0.45, high_eqbound_d=0.45, alpha = 0.025)
+#TOSTtwo(m1= mean(subset(data,group=="beat")$attitudinal), m2= mean(subset(data,group=="no-beat")$attitudinal), sd1= sd(subset(data,group=="beat")$attitudinal), sd2= sd(subset(data,group=="no-beat")$attitudinal), n1= length(subset(data,group=="beat")$attitudinal), n2= length(subset(data,group=="no-beat")$attitudinal), low_eqbound_d=-0.45, high_eqbound_d=0.45, alpha = 0.025) #assuming SESOI .45
+TOSTtwo(m1= mean(subset(data,group=="beat")$attitudinal), m2= mean(subset(data,group=="no-beat")$attitudinal), sd1= sd(subset(data,group=="beat")$attitudinal), sd2= sd(subset(data,group=="no-beat")$attitudinal), n1= length(subset(data,group=="beat")$attitudinal), n2= length(subset(data,group=="no-beat")$attitudinal), low_eqbound_d=-0.4, high_eqbound_d=0.4, alpha = 0.025) #assuming SESOI .4
