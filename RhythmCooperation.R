@@ -108,3 +108,47 @@ TOSTtwo(m1= mean(subset(data,group=="beat")$behavior), m2= mean(subset(data,grou
 
 #2) Attitudinal
 TOSTtwo(m1= mean(subset(data,group=="beat")$attitudinal), m2= mean(subset(data,group=="no-beat")$attitudinal), sd1= sd(subset(data,group=="beat")$attitudinal), sd2= sd(subset(data,group=="no-beat")$attitudinal), n1= length(subset(data,group=="beat")$attitudinal), n2= length(subset(data,group=="no-beat")$attitudinal), low_eqbound_d=-0.4, high_eqbound_d=0.4, alpha = 0.025) #assuming SESOI .4
+
+################Potential code for GLMM suggested by Martin Lang:
+
+NROW(data)/4 # number of sessions
+data$sess <- c(rep(1:8,each=4)) # label each session
+
+hist(data$behavior) # histogram suggests data bounded on the upper boundary
+
+## My preferred approach - hierarchical beta regression
+library(glmmTMB)
+
+data$behav.p <- data$behavior/1000 # main DV as percentage
+data$behav.p <- (data$behav.p*31 + 0.5)/32 #adapt for beta regression (can't contain 0 and 1)
+
+summary(m1 <- glmmTMB(behav.p ~  (1|sess), family = "beta_family", data = data))
+summary(m2 <- glmmTMB(behav.p ~ group + (1|sess), family = "beta_family", data = data))
+summary(m3 <- glmmTMB(behav.p ~ group + sex + age + musicianship + (1|sess), family = "beta_family", data = data))
+
+library(DHARMa)
+
+simulationOutput = simulateResiduals(m3) # fit diagnostics
+plot(simulationOutput)
+
+library(effects)
+
+summary(allEffects(m3)) # predicted values
+
+## simpler LMM
+library(lme4)
+summary(m1 <- lmer(behavior ~ (1|sess),  data = data))
+summary(m2 <- lmer(behavior ~ group + (1|sess), data = data))
+summary(m3 <- lmer(behavior ~ group + sex + age + musicianship + (1|sess), data = data))
+
+summary(allEffects(m3)) # note upper 95% CI for group effect predicts values above 1000
+simulationOutput = simulateResiduals(m3)
+plot(simulationOutput)
+
+## simple OLS model
+summary(m2 <- lm(behavior ~ group, data = data))
+summary(m3 <- lm(behavior ~ group + sex + age + musicianship, data = data))
+
+summary(allEffects(m2))
+simulationOutput = simulateResiduals(m2)
+plot(simulationOutput) # this is the fit of your t-test
